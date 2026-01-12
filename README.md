@@ -15,3 +15,9 @@ git clone https://github.com/PacketAnglers/clab-simple-l2ls.git
 ``` bash
 clab deploy -t topology.clab.yml
 ```
+
+## Connect to device
+
+From Topology Viewer, right click on device and select SSH.
+
+Password for all devices is:  `admin`.
