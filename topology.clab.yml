@@ -1,0 +1,54 @@
+---
+name: clab-simple-l2ls
+prefix: ""
+
+mgmt:
+  network: custom_mgmt
+  ipv4-subnet: 172.100.100.0/24
+
+topology:
+
+  defaults:
+    env:
+      INTFTYPE: et
+    kind: ceos
+
+  kinds:
+    ceos:
+      image: arista/ceos:latest
+    linux:
+      image: ghcr.io/aristanetworks/aclabs/host-ubuntu:rev1.1
+
+  nodes:
+    spine1:
+      kind: ceos
+    spine2:
+      kind: ceos
+    leaf1:
+      kind: ceos
+    leaf2:
+      kind: ceos
+    leaf3:
+      kind: ceos
+    leaf4:
+      kind: ceos
+
+
+  links:
+    - endpoints: [ "spine1:et5", "spine2:et5" ]
+    - endpoints: [ "spine1:et6", "spine2:et6" ]
+
+    - endpoints: [ "leaf1:et1", "spine1:et1" ]
+    - endpoints: [ "leaf1:et2", "spine2:et1" ]
+    - endpoints: [ "leaf2:et1", "spine1:et2" ]
+    - endpoints: [ "leaf2:et2", "spine2:et2" ]
+    - endpoints: [ "leaf1:et3", "leaf2:et3" ]
+    - endpoints: [ "leaf1:et4", "leaf2:et4" ]
+
+
+    - endpoints: [ "leaf3:et1", "spine1:et3" ]
+    - endpoints: [ "leaf3:et2", "spine2:et3" ]
+    - endpoints: [ "leaf4:et1", "spine1:et4" ]
+    - endpoints: [ "leaf4:et2", "spine2:et4" ]
+    - endpoints: [ "leaf3:et3", "leaf4:et3" ]
+    - endpoints: [ "leaf3:et4", "leaf4:et4" ]
